@@ -103,20 +103,41 @@ above-cap order, because a routine cannot pause to obtain consent mid-run.
 
 ---
 
-## 4. Risk guardrails (operator sets these; defaults shown as placeholders)
+## 4. Risk guardrails
 
-- Max position size: **[e.g. 5%]** of portfolio value.
-- Max new positions per cycle: **[e.g. 3]**.
-- Max total capital deployed per cycle: **[e.g. $X]**.
-- Mandatory stop on every entry: **[e.g. -15% or a thesis-based level]**.
+- Max position size: **20%** of portfolio value (the $10/trade cap dominates at this
+  account size).
+- Max new positions per cycle: **2**.
+- Max total capital deployed per cycle: **$20** (independent of, and never exceeding, the
+  $50/day cap).
+- Mandatory stop on every entry: **-8%** from fill, OR a thesis-based level if it sits
+  tighter.
+- Mandatory target on every entry: **+16%** from fill (2:1 reward:risk vs. the -8% stop),
+  OR the Stage 2 valuation ceiling if lower.
 - **Autonomous spend caps (the primary control for unattended runs):** auto-execute only
   trades **≤ $10 each** and **< $50/day total**; everything above escalates for approval.
   These caps bound the worst case if a run ever acts on bad data, so they fail closed.
 - No averaging down without re-running stages 2–4 from scratch.
-- Circuit breaker: if the portfolio is down **[e.g. 10%]** from its recent peak, or a
+- Circuit breaker: if the portfolio is down **10%** from its recent peak, or a
   position breaches its stop, pause all new buys and surface the situation.
 
 If a proposed trade would breach a guardrail, stop and flag it rather than proceeding.
+
+## 4a. Screen gates (Stage 1 filter — Robinhood data)
+
+A candidate must clear ALL of these to enter the funnel. All figures from the live
+Robinhood feed; mark "unavailable" rather than estimating, and drop the name if a required
+gate can't be sourced.
+
+- Price: between **$2 and $400** (avoid sub-$2 illiquidity).
+- Market cap: **≥ $2B** (mid-cap and up; excludes micro-cap volatility).
+- Average daily volume: **≥ 500,000 shares** (liquidity floor).
+- Revenue growth (YoY): **≥ 8%**.
+- Profitability: **positive trailing net income OR positive operating cash flow.**
+- Leverage: debt-to-equity **≤ 2.0**.
+- Valuation: **P/E ≤ 40** where earnings are positive; if unprofitable, require **P/S ≤ 10**.
+- Sector: no single-sector restriction, but **no more than 1 new name per sector per cycle**
+  to limit concentration.
 
 ---
 
