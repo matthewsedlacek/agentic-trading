@@ -11,7 +11,7 @@ clears the one before. Nothing reaches an order without real data, a predefined 
 and explicit human confirmation.
 
 **Operating policy lives in `POLICY.md`** alongside this file (restricted list, the
-$10/$50 spend caps, data-grounding, risk guardrails). Treat POLICY.md as binding for
+$25/$50 spend caps, data-grounding, risk guardrails). Treat POLICY.md as binding for
 every run; this skill is the procedure, POLICY.md is the law.
 
 ## Precondition — market must be open (autonomous runs, check FIRST)
@@ -87,7 +87,7 @@ Filtering rules:
   link) so the same trade doesn't re-surface every run.
 
 Important framing: the `amount` field is a range, so you cannot derive exact sizing from
-it — and it's irrelevant to your sizing anyway, because your own $10/$50 caps govern what
+it — and it's irrelevant to your sizing anyway, because your own $25/$50 caps govern what
 gets bought, independent of the member's trade size. The more durable signal in the
 research is committee-aligned trading (a member buying in a sector their committee
 oversees); FMP doesn't return committee data, so treat that as optional manual enrichment
@@ -149,7 +149,7 @@ prompt. If you cannot retrieve it, fail closed: do not auto-execute; escalate in
 ### Auto lane — may place without asking
 
 A buy executes automatically ONLY if BOTH:
-- order notional **≤ $10**, AND
+- order notional **≤ $25**, AND
 - today's summed buys **< $50** before this order.
 
 Sequence: re-run Gate 0 → review/simulate the order → place it → immediately stage the
@@ -197,7 +197,7 @@ positions and, if a position's falsifier (from Stage 2) appears met or its horiz
 passed, it flags the position to the operator with the evidence — it does not liquidate
 autonomously. The operator decides in an interactive session.
 
-**Spend caps do not apply to exits.** The $10/$50 caps govern capital deployment (buys).
+**Spend caps do not apply to exits.** The $25/$50 caps govern capital deployment (buys).
 A protective or risk-reducing sell executes at whatever size the position requires — never
 hold a loss-cutting sell because of a buy budget.
 
@@ -232,7 +232,7 @@ Next action:      simulate order for confirmation? (y/n)
 ## Things to refuse or halt on
 
 - Any trade in a restricted name (SEZL).
-- Auto-executing a **buy** above $10, or once the day's buys reach $50 — escalate instead.
+- Auto-executing a **buy** above $25, or once the day's buys reach $50 — escalate instead.
   (Spend caps govern BUYS only. Risk-reducing exits are never blocked by them — see below.)
 - Auto-executing when today's spend can't be read or a price can't be resolved (fail closed).
 - Placing any order without a prior review/simulation.

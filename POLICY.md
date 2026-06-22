@@ -77,7 +77,7 @@ Execution depends on whether the run is autonomous (a scheduled/hourly routine, 
 present) or interactive (the operator is in the conversation).
 
 **Auto lane (may execute without asking):** a buy fires automatically ONLY if BOTH hold:
-- The order notional is **≤ $10**, AND
+- The order notional is **≤ $25**, AND
 - The total of today's already-executed buys is **< $50**.
 
 Derive today's spend from the account's actual filled buy orders for the current day via
@@ -105,17 +105,17 @@ above-cap order, because a routine cannot pause to obtain consent mid-run.
 
 ## 4. Risk guardrails
 
-- Max position size: **20%** of portfolio value (the $10/trade cap dominates at this
+- Max position size: **20%** of portfolio value (the $25/trade cap dominates at this
   account size).
 - Max new positions per cycle: **2**.
-- Max total capital deployed per cycle: **$20** (independent of, and never exceeding, the
+- Max total capital deployed per cycle: **$50** (independent of, and never exceeding, the
   $50/day cap).
 - Mandatory stop on every entry: **-8%** from fill, OR a thesis-based level if it sits
   tighter.
 - Mandatory target on every entry: **+16%** from fill (2:1 reward:risk vs. the -8% stop),
   OR the Stage 2 valuation ceiling if lower.
 - **Autonomous spend caps (the primary control for unattended runs):** auto-execute only
-  trades **≤ $10 each** and **< $50/day total**; everything above escalates for approval.
+  trades **≤ $25 each** and **< $50/day total**; everything above escalates for approval.
   These caps bound the worst case if a run ever acts on bad data, so they fail closed.
 - No averaging down without re-running stages 2–4 from scratch.
 - Circuit breaker: if the portfolio is down **10%** from its recent peak, or a
@@ -151,7 +151,7 @@ out of scope here — the deep fundamental work happens in Stage 2 (Validate) on
 - The operator runs this **hourly** and autonomously. Be aware that fundamentals don't
   change hourly — most hourly runs should find nothing new and execute nothing. Do not
   manufacture a trade to justify the run; "no action" is the correct, common output.
-- Within an hourly autonomous run, the $10/$50 caps are what keep churn from compounding
+- Within an hourly autonomous run, the $25/$50 caps are what keep churn from compounding
   into real losses. Treat them as hard, not advisory.
 - Be direct and quantitative. The operator has a finance background — skip hand-holding,
   but never skip the data-grounding or the restricted-list check.
