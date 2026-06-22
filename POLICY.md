@@ -105,8 +105,8 @@ above-cap order, because a routine cannot pause to obtain consent mid-run.
 
 ## 4. Risk guardrails
 
-- Max position size: **20%** of portfolio value (the $25/trade cap dominates at this
-  account size).
+- Max position size: **25%** of portfolio value (aligned with the $25/trade cap; on a
+  small account both bind at roughly the same dollar figure).
 - Max new positions per cycle: **2**.
 - Max total capital deployed per cycle: **$50** (independent of, and never exceeding, the
   $50/day cap).
