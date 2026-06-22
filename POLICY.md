@@ -125,19 +125,24 @@ If a proposed trade would breach a guardrail, stop and flag it rather than proce
 
 ## 4a. Screen gates (Stage 1 filter — Robinhood data)
 
-A candidate must clear ALL of these to enter the funnel. All figures from the live
-Robinhood feed; mark "unavailable" rather than estimating, and drop the name if a required
-gate can't be sourced.
+A candidate must clear ALL of these to enter the funnel. Every gate here is sourceable
+from Robinhood's `get_equity_fundamentals` / quote / historicals endpoints — no external
+data source required. Pull each figure from the live Robinhood feed; mark "unavailable"
+rather than estimating, and drop the name if a required gate can't be sourced.
 
 - Price: between **$2 and $400** (avoid sub-$2 illiquidity).
 - Market cap: **≥ $2B** (mid-cap and up; excludes micro-cap volatility).
 - Average daily volume: **≥ 500,000 shares** (liquidity floor).
-- Revenue growth (YoY): **≥ 8%**.
-- Profitability: **positive trailing net income OR positive operating cash flow.**
-- Leverage: debt-to-equity **≤ 2.0**.
-- Valuation: **P/E ≤ 40** where earnings are positive; if unprofitable, require **P/S ≤ 10**.
+- Valuation: **P/E between 0 and 40** — a positive P/E enforces trailing profitability
+  (excludes loss-makers), and the ceiling excludes the richly valued.
+- Balance-sheet sanity: **P/B ≤ 8** (stands in for a leverage check, since Robinhood does
+  not expose debt-to-equity; an extreme P/B flags thin or negative book equity).
 - Sector: no single-sector restriction, but **no more than 1 new name per sector per cycle**
   to limit concentration.
+
+Note: this is a price / liquidity / valuation screen. Robinhood's fundamentals feed does
+not expose revenue growth or debt-to-equity, so those quality dimensions are intentionally
+out of scope here — the deep fundamental work happens in Stage 2 (Validate) on survivors.
 
 ---
 
