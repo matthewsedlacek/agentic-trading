@@ -167,25 +167,36 @@ If the order breaches either cap, do not place it. Then:
 2. **Commit the proposal.** Stage and commit the file to the current branch with a message
    like `Log TICKER trade proposal for manual review (YYYY-MM-DD run)`.
 
-3. **Open a GitHub pull request.** Push the branch and create a PR via the GitHub REST API
-   using a `curl` call (the `gh` CLI may not be installed):
+3. **Open a GitHub pull request.** Push the branch and create a PR using the `gh` CLI
+   (pre-authenticated in the cloud environment):
 
    ```
-   curl -s -X POST \
-     -H "Authorization: token $GITHUB_TOKEN" \
-     -H "Accept: application/vnd.github+json" \
-     https://api.github.com/repos/matthewsedlacek/agentic-trading/pulls \
-     -d '{
-       "title": "Proposal: TICKER — one-line thesis (<date>)",
-       "body":  "## Summary\n- **Ticker:** TICKER\n- **Proposed size:** $X\n- **Why escalated:** <cap/guardrail breached>\n\n## Thesis\n<one-liner>\n\n## Falsifier\n<falsifier>\n\n## Entry / Exit plan\n- Entry: ...\n- Stop: ...\n- Target: ...\n- Horizon: ...\n\nFull details in `proposals/YYYY-MM-DD-TICKER.md`.",
-       "head":  "<current-branch>",
-       "base":  "main"
-     }'
+   gh pr create \
+     --title "Proposal: TICKER — one-line thesis (<date>)" \
+     --body "## Summary
+   - **Ticker:** TICKER
+   - **Proposed size:** $X
+   - **Why escalated:** <cap or guardrail breached>
+
+   ## Thesis
+   <one-liner>
+
+   ## Falsifier
+   <falsifier>
+
+   ## Entry / Exit plan
+   - Entry: ...
+   - Stop: ...
+   - Target: ...
+   - Horizon: ...
+
+   Full details in \`proposals/YYYY-MM-DD-TICKER.md\`." \
+     --base main
    ```
 
-   If `GITHUB_TOKEN` is not set or the curl call fails, log the error and continue — do
-   not abort the run. The proposal file is the source of truth; the PR is the notification
-   channel.
+   If `gh pr create` fails (e.g. PR already exists for this branch), log the error and
+   continue — do not abort the run. The proposal file is the source of truth; the PR is
+   the notification channel.
 
 4. The PR waits for interactive approval. A routine never places an above-cap order;
    the operator approves it in an interactive session where simulation + confirmation apply.
