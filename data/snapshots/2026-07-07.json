@@ -1,0 +1,29 @@
+{
+  "date": "2026-07-07",
+  "portfolioValueUsd": 662.61,
+  "cashUsd": 297.80,
+  "positions": [
+    { "ticker": "HBAN", "shares": 1.0, "price": 18.005 },
+    { "ticker": "CMCSA", "shares": 1.0, "price": 23.96 },
+    { "ticker": "MKC", "shares": 0.528988, "price": 53.53 },
+    { "ticker": "PFE", "shares": 0.528672, "price": 24.22 },
+    { "ticker": "AMZN", "shares": 0.104362, "price": 246.00 },
+    { "ticker": "MSFT", "shares": 0.067616, "price": 391.17 },
+    { "ticker": "NWG", "shares": 1.0, "price": 18.249 },
+    { "ticker": "PG", "shares": 0.047827, "price": 153.04 },
+    { "ticker": "NKE", "shares": 0.600241, "price": 43.575 },
+    { "ticker": "ACN", "shares": 0.193199, "price": 141.68 },
+    { "ticker": "XOM", "shares": 0.182408, "price": 140.46 },
+    { "ticker": "NEM", "shares": 0.256463, "price": 96.75 },
+    { "ticker": "EXC", "shares": 0.513919, "price": 47.836 },
+    { "ticker": "DIS", "shares": 0.254738, "price": 98.33 },
+    { "ticker": "VZ", "shares": 0.588098, "price": 43.27 },
+    { "ticker": "TM", "shares": 0.138190, "price": 180.96 }
+  ],
+  "benchmarks": {
+    "SPY": 749.99,
+    "QQQ": null
+  },
+  "reconstructed": false,
+  "runResult": "snapshot from live Robinhood portfolio + intraday quotes (2026-07-07T13:46:30Z); TM bought this run"
+}

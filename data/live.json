@@ -1,29 +1,30 @@
 {
-  "generatedAt": "2026-07-07T02:02:42Z",
+  "generatedAt": "2026-07-07T13:46:30Z",
   "source": "Robinhood connector (agentic account)",
-  "portfolioValueUsd": 657.2,
-  "equityValueUsd": 334.4,
-  "cashUsd": 322.8,
-  "pendingDepositsUsd": 25.0,
+  "portfolioValueUsd": 662.61,
+  "equityValueUsd": 364.81,
+  "cashUsd": 297.80,
+  "pendingDepositsUsd": 0.0,
   "positions": [
-    { "ticker": "HBAN", "shares": 1.0, "avgBuyPrice": 17.02, "price": 17.72, "sessionClose": 17.89, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "CMCSA", "shares": 1.0, "avgBuyPrice": 22.29, "price": 23.45, "sessionClose": 23.38, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "MKC", "shares": 0.528988, "avgBuyPrice": 47.26, "price": 51.68, "sessionClose": 51.78, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "PFE", "shares": 0.528672, "avgBuyPrice": 24.59, "price": 23.82, "sessionClose": 23.72, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "AMZN", "shares": 0.104362, "avgBuyPrice": 239.55, "price": 244.72, "sessionClose": 244.16, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "MSFT", "shares": 0.067616, "avgBuyPrice": 369.73, "price": 386.73, "sessionClose": 386.74, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "NWG", "shares": 1.0, "avgBuyPrice": 17.57, "price": 18.21, "sessionClose": 18.37, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "PG", "shares": 0.047827, "avgBuyPrice": 146.36, "price": 149.65, "sessionClose": 149.31, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "NKE", "shares": 0.600241, "avgBuyPrice": 41.65, "price": 43.33, "sessionClose": 43.34, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "ACN", "shares": 0.193199, "avgBuyPrice": 129.4, "price": 137.49, "sessionClose": 136.96, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "XOM", "shares": 0.182408, "avgBuyPrice": 137.0, "price": 136.93, "sessionClose": 136.44, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "NEM", "shares": 0.256463, "avgBuyPrice": 97.48, "price": 97.03, "sessionClose": 98.2, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "EXC", "shares": 0.513919, "avgBuyPrice": 46.7, "price": 47.11, "sessionClose": 47.05, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "DIS", "shares": 0.254738, "avgBuyPrice": 98.14, "price": 97.18, "sessionClose": 97.41, "sessionCloseDate": "2026-07-06" },
-    { "ticker": "VZ", "shares": 0.588098, "avgBuyPrice": 42.51, "price": 42.14, "sessionClose": 42.07, "sessionCloseDate": "2026-07-06" }
+    { "ticker": "HBAN", "shares": 1.0, "avgBuyPrice": 17.02, "price": 18.005, "sessionClose": 17.89, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "CMCSA", "shares": 1.0, "avgBuyPrice": 22.29, "price": 23.96, "sessionClose": 23.38, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "MKC", "shares": 0.528988, "avgBuyPrice": 47.26, "price": 53.53, "sessionClose": 51.78, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "PFE", "shares": 0.528672, "avgBuyPrice": 24.59, "price": 24.22, "sessionClose": 23.72, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "AMZN", "shares": 0.104362, "avgBuyPrice": 239.55, "price": 246.00, "sessionClose": 244.16, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "MSFT", "shares": 0.067616, "avgBuyPrice": 369.73, "price": 391.17, "sessionClose": 386.74, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "NWG", "shares": 1.0, "avgBuyPrice": 17.57, "price": 18.249, "sessionClose": 18.37, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "PG", "shares": 0.047827, "avgBuyPrice": 146.36, "price": 153.04, "sessionClose": 149.31, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "NKE", "shares": 0.600241, "avgBuyPrice": 41.65, "price": 43.575, "sessionClose": 43.34, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "ACN", "shares": 0.193199, "avgBuyPrice": 129.40, "price": 141.68, "sessionClose": 136.96, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "XOM", "shares": 0.182408, "avgBuyPrice": 137.00, "price": 140.46, "sessionClose": 136.44, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "NEM", "shares": 0.256463, "avgBuyPrice": 97.48, "price": 96.75, "sessionClose": 98.20, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "EXC", "shares": 0.513919, "avgBuyPrice": 46.70, "price": 47.836, "sessionClose": 47.05, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "DIS", "shares": 0.254738, "avgBuyPrice": 98.14, "price": 98.33, "sessionClose": 97.41, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "VZ", "shares": 0.588098, "avgBuyPrice": 42.51, "price": 43.27, "sessionClose": 42.07, "sessionCloseDate": "2026-07-06" },
+    { "ticker": "TM", "shares": 0.138190, "avgBuyPrice": 180.91, "price": 180.96, "sessionClose": 179.80, "sessionCloseDate": "2026-07-06" }
   ],
   "benchmarks": {
-    "SPY": { "price": 750.59, "sessionClose": 751.28, "sessionCloseDate": "2026-07-06" }
+    "SPY": { "price": 749.99, "sessionClose": 751.28, "sessionCloseDate": "2026-07-06" }
   },
-  "note": "price is the most recent trade (may be extended-hours); sessionClose is the official close for sessionCloseDate. Refreshed on each agent run — check generatedAt for staleness."
+  "note": "price is the most recent trade (may be extended-hours); sessionClose is the official close for sessionCloseDate. TM added this run (2026-07-07 autonomous, $25 market buy, order 6a4d02b2). Refreshed on each agent run — check generatedAt for staleness."
 }
