@@ -1,0 +1,66 @@
+{
+  "date": "2026-07-01",
+  "positions": [
+    {
+      "ticker": "ACN",
+      "shares": 0.193199,
+      "price": 131.13
+    },
+    {
+      "ticker": "AMZN",
+      "shares": 0.104362,
+      "price": 241.7
+    },
+    {
+      "ticker": "CMCSA",
+      "shares": 1,
+      "price": 23.73
+    },
+    {
+      "ticker": "HBAN",
+      "shares": 1,
+      "price": 18.11
+    },
+    {
+      "ticker": "MKC",
+      "shares": 0.528988,
+      "price": 52.91
+    },
+    {
+      "ticker": "MSFT",
+      "shares": 0.067616,
+      "price": 384.28
+    },
+    {
+      "ticker": "NKE",
+      "shares": 0.600241,
+      "price": 43.06
+    },
+    {
+      "ticker": "NWG",
+      "shares": 1,
+      "price": 17.99
+    },
+    {
+      "ticker": "PFE",
+      "shares": 0.528672,
+      "price": 23.88
+    },
+    {
+      "ticker": "PG",
+      "shares": 0.047827,
+      "price": 147.43
+    },
+    {
+      "ticker": "XOM",
+      "shares": 0.182408,
+      "price": 136.28
+    }
+  ],
+  "benchmarks": {
+    "SPY": 745.76,
+    "QQQ": 725.17
+  },
+  "reconstructed": true,
+  "runResult": "reconstructed from Robinhood fill history and daily closes"
+}

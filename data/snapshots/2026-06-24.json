@@ -1,0 +1,36 @@
+{
+  "date": "2026-06-24",
+  "positions": [
+    {
+      "ticker": "CMCSA",
+      "shares": 1,
+      "price": 22.64
+    },
+    {
+      "ticker": "HBAN",
+      "shares": 1,
+      "price": 17.58
+    },
+    {
+      "ticker": "MKC",
+      "shares": 0.528988,
+      "price": 47.6
+    },
+    {
+      "ticker": "PFE",
+      "shares": 0.528672,
+      "price": 24.04
+    },
+    {
+      "ticker": "T",
+      "shares": 1,
+      "price": 22.37
+    }
+  ],
+  "benchmarks": {
+    "SPY": 733.24,
+    "QQQ": 710.62
+  },
+  "reconstructed": true,
+  "runResult": "reconstructed from Robinhood fill history and daily closes"
+}

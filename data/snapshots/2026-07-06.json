@@ -1,0 +1,88 @@
+{
+  "date": "2026-07-06",
+  "portfolioValueUsd": 657.19,
+  "cashUsd": 322.8,
+  "positions": [
+    {
+      "ticker": "ACN",
+      "shares": 0.193199,
+      "price": 136.96
+    },
+    {
+      "ticker": "AMZN",
+      "shares": 0.104362,
+      "price": 244.16
+    },
+    {
+      "ticker": "CMCSA",
+      "shares": 1,
+      "price": 23.38
+    },
+    {
+      "ticker": "DIS",
+      "shares": 0.254738,
+      "price": 97.41
+    },
+    {
+      "ticker": "EXC",
+      "shares": 0.513919,
+      "price": 47.05
+    },
+    {
+      "ticker": "HBAN",
+      "shares": 1,
+      "price": 17.89
+    },
+    {
+      "ticker": "MKC",
+      "shares": 0.528988,
+      "price": 51.78
+    },
+    {
+      "ticker": "MSFT",
+      "shares": 0.067616,
+      "price": 386.74
+    },
+    {
+      "ticker": "NEM",
+      "shares": 0.256463,
+      "price": 98.2
+    },
+    {
+      "ticker": "NKE",
+      "shares": 0.600241,
+      "price": 43.34
+    },
+    {
+      "ticker": "NWG",
+      "shares": 1,
+      "price": 18.37
+    },
+    {
+      "ticker": "PFE",
+      "shares": 0.528672,
+      "price": 23.72
+    },
+    {
+      "ticker": "PG",
+      "shares": 0.047827,
+      "price": 149.31
+    },
+    {
+      "ticker": "VZ",
+      "shares": 0.588098,
+      "price": 42.07
+    },
+    {
+      "ticker": "XOM",
+      "shares": 0.182408,
+      "price": 136.44
+    }
+  ],
+  "benchmarks": {
+    "SPY": 751.28,
+    "QQQ": 722.82
+  },
+  "reconstructed": false,
+  "runResult": "snapshot from live Robinhood portfolio + official closes"
+}

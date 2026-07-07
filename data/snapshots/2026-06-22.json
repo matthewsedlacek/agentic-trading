@@ -1,0 +1,21 @@
+{
+  "date": "2026-06-22",
+  "positions": [
+    {
+      "ticker": "HBAN",
+      "shares": 1,
+      "price": 17.05
+    },
+    {
+      "ticker": "T",
+      "shares": 1,
+      "price": 22.1
+    }
+  ],
+  "benchmarks": {
+    "SPY": 744.39,
+    "QQQ": 737.95
+  },
+  "reconstructed": true,
+  "runResult": "reconstructed from Robinhood fill history and daily closes"
+}

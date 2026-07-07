@@ -1,0 +1,226 @@
+{
+  "asOf": "2026-07-07T02:39:00Z",
+  "source": "robinhood",
+  "account": {
+    "totalValueUsd": 657.19,
+    "equityValueUsd": 334.39,
+    "cashUsd": 322.8,
+    "pendingDepositsUsd": 25
+  },
+  "realizedPnlUsd": -1.78,
+  "realizedTrades": [
+    {
+      "date": "2026-07-01",
+      "symbol": "T",
+      "shares": 1,
+      "price": 20.46,
+      "realizedGainUsd": -1.78
+    }
+  ],
+  "fills": [
+    {
+      "date": "2026-06-22",
+      "timestamp": "2026-06-22T16:46:58.973Z",
+      "symbol": "T",
+      "side": "buy",
+      "shares": 1,
+      "price": 22.235,
+      "notionalUsd": 22.24,
+      "orderType": "limit",
+      "trigger": "immediate",
+      "orderId": "6a396702-19f2-4873-b9a7-7c6cbe5d7296"
+    },
+    {
+      "date": "2026-06-22",
+      "timestamp": "2026-06-22T19:40:56.236Z",
+      "symbol": "HBAN",
+      "side": "buy",
+      "shares": 1,
+      "price": 17.0199,
+      "notionalUsd": 17.02,
+      "orderType": "limit",
+      "trigger": "immediate",
+      "orderId": "6a398fc8-87ec-45ff-ba8f-e171bbd647b1"
+    },
+    {
+      "date": "2026-06-23",
+      "timestamp": "2026-06-23T13:40:38.921Z",
+      "symbol": "CMCSA",
+      "side": "buy",
+      "shares": 1,
+      "price": 22.2899,
+      "notionalUsd": 22.29,
+      "orderType": "limit",
+      "trigger": "immediate",
+      "orderId": "6a3a8cd6-e793-4808-a3a9-152db4459114"
+    },
+    {
+      "date": "2026-06-23",
+      "timestamp": "2026-06-23T15:41:39.637Z",
+      "symbol": "MKC",
+      "side": "buy",
+      "shares": 0.528988,
+      "price": 47.26,
+      "notionalUsd": 25,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a3aa933-5ff5-4dee-b98d-6da13f17380e"
+    },
+    {
+      "date": "2026-06-24",
+      "timestamp": "2026-06-24T14:39:20.582Z",
+      "symbol": "PFE",
+      "side": "buy",
+      "shares": 0.528672,
+      "price": 24.5899,
+      "notionalUsd": 13,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a3bec18-527b-4b27-819c-289014fde989"
+    },
+    {
+      "date": "2026-06-29",
+      "timestamp": "2026-06-29T13:41:31.915Z",
+      "symbol": "AMZN",
+      "side": "buy",
+      "shares": 0.104362,
+      "price": 239.5499,
+      "notionalUsd": 25,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a42760b-06a2-4e23-a308-e04bcca126f0"
+    },
+    {
+      "date": "2026-06-29",
+      "timestamp": "2026-06-29T13:41:32.834Z",
+      "symbol": "XOM",
+      "side": "buy",
+      "shares": 0.182408,
+      "price": 137,
+      "notionalUsd": 24.99,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a42760c-dcb1-4ffd-912c-be590ca0f788"
+    },
+    {
+      "date": "2026-06-30",
+      "timestamp": "2026-06-30T13:38:06.271Z",
+      "symbol": "MSFT",
+      "side": "buy",
+      "shares": 0.067616,
+      "price": 369.7299,
+      "notionalUsd": 25,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a43c6be-90d4-474a-9a71-5b222812f985"
+    },
+    {
+      "date": "2026-06-30",
+      "timestamp": "2026-06-30T13:40:14.901Z",
+      "symbol": "NWG",
+      "side": "buy",
+      "shares": 1,
+      "price": 17.57,
+      "notionalUsd": 17.57,
+      "orderType": "limit",
+      "trigger": "immediate",
+      "orderId": "6a43c73e-a9c0-4d70-8221-783d416a42a6"
+    },
+    {
+      "date": "2026-06-30",
+      "timestamp": "2026-06-30T19:46:13.809Z",
+      "symbol": "PG",
+      "side": "buy",
+      "shares": 0.047827,
+      "price": 146.3599,
+      "notionalUsd": 7,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a441d05-8b60-4ccb-98c3-6b306fabe985"
+    },
+    {
+      "date": "2026-07-01",
+      "timestamp": "2026-07-01T13:45:25.468Z",
+      "symbol": "NKE",
+      "side": "buy",
+      "shares": 0.600241,
+      "price": 41.6499,
+      "notionalUsd": 25,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a4519f5-bd65-4e56-8438-44e5e9241958"
+    },
+    {
+      "date": "2026-07-01",
+      "timestamp": "2026-07-01T14:48:48.069Z",
+      "symbol": "ACN",
+      "side": "buy",
+      "shares": 0.193199,
+      "price": 129.3999,
+      "notionalUsd": 25,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a4528cf-c10c-431f-9400-c67bdc4ad446"
+    },
+    {
+      "date": "2026-07-01",
+      "timestamp": "2026-07-01T18:50:41.049Z",
+      "symbol": "T",
+      "side": "sell",
+      "shares": 1,
+      "price": 20.46,
+      "notionalUsd": 20.46,
+      "orderType": "market",
+      "trigger": "stop",
+      "orderId": "6a396729-9c7c-413f-a0da-58236008a4da"
+    },
+    {
+      "date": "2026-07-02",
+      "timestamp": "2026-07-02T13:44:38.815Z",
+      "symbol": "NEM",
+      "side": "buy",
+      "shares": 0.256463,
+      "price": 97.4799,
+      "notionalUsd": 25,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a466b46-6fb2-4c9d-b5c7-83c8e4828522"
+    },
+    {
+      "date": "2026-07-02",
+      "timestamp": "2026-07-02T13:44:39.704Z",
+      "symbol": "EXC",
+      "side": "buy",
+      "shares": 0.513919,
+      "price": 46.6999,
+      "notionalUsd": 24,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a466b47-ead3-4d90-9c1a-b5d623d77180"
+    },
+    {
+      "date": "2026-07-06",
+      "timestamp": "2026-07-06T13:46:13.954Z",
+      "symbol": "DIS",
+      "side": "buy",
+      "shares": 0.254738,
+      "price": 98.1399,
+      "notionalUsd": 25,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a4bb1a5-8ec4-460a-9507-655ab592b9c6"
+    },
+    {
+      "date": "2026-07-06",
+      "timestamp": "2026-07-06T13:46:19.606Z",
+      "symbol": "VZ",
+      "side": "buy",
+      "shares": 0.588098,
+      "price": 42.5099,
+      "notionalUsd": 25,
+      "orderType": "market",
+      "trigger": "immediate",
+      "orderId": "6a4bb1ab-c63b-4b25-bbc0-e720168bf39e"
+    }
+  ]
+}
