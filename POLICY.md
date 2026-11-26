@@ -178,6 +178,35 @@ The thresholds above are starting defaults. Change them here first, then in
   year-over-year context. It can never pass Stage 2 on its own, and no run signs up for,
   pays for or logs in to an imagery provider.
 
+## 4d. Nightly exit review (proposals only)
+
+Because Robinhood rejects resting stop and target orders on fractional shares, most
+positions have no broker-side exit. A nightly review (`tools/exit_review.py`, runbook in
+`reviews/exits/README.md`) checks every open position against its written exit plan and
+writes a proposal report to `reviews/exits/<date>.md` for the operator to approve.
+
+- **It never trades.** The nightly run uses read-only connector calls (positions, quotes,
+  daily bars) and nothing else. It never places, reviews, changes or cancels an order,
+  and never calls an order tool. Approved exits are placed in an interactive session,
+  one confirmation per order, with simulation first (§3).
+- **SELL** (proposed for the whole position): the last close is at or below the stop, or
+  at or above the target.
+- **REVIEW** (operator's judgement, no sell proposed): past the time horizon; was up
+  **≥ 10%** since entry and is now up **≤ 2%**; or the position is down while SPY is
+  risk-off (§4b).
+- **WATCH**: within **2%** of the stop, within **3%** of the target, horizon ends within
+  **14 days**, or the position is down while SPY is in caution.
+- A position with no trade log uses the §4 defaults (-8% / +16% from average cost,
+  about 6 months) and the report says so. Thesis-break conditions are listed for the
+  operator, never judged by the tool.
+- **Fail closed.** Restricted names (§0) are skipped. A missing price or cost means no
+  proposal. If the positions file is more than 36 hours old, every SELL drops to REVIEW.
+- A stop breach, or the portfolio **10%** below its recent peak, raises the §4 circuit
+  breaker alert in the report.
+
+These thresholds are starting guesses, not tested rules. Change them here first, then in
+`tools/exit_review.py`.
+
 ---
 
 ## 5. Cadence and tone
