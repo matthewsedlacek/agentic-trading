@@ -177,6 +177,11 @@ The thresholds above are starting defaults. Change them here first, then in
 - **Satellite Scout** (`research/satellite/`). Dated imagery of a company's sites gives
   year-over-year context. It can never pass Stage 2 on its own, and no run signs up for,
   pays for or logs in to an imagery provider.
+- **IBD 50 flag** (`trading-funnel` Stage 1c). Shortlisted names are marked on / off /
+  unknown for the IBD 50, using Innovator IBD 50 ETF (FFTY) holdings via FMP as a public
+  proxy. It is an annotation only: it never admits, rejects or resizes a name, never
+  relaxes a cap, guardrail or the edge gate, and never applies to a restricted name. If the
+  source can't be read or is stale, the flag is "unknown", never guessed.
 
 ---
 

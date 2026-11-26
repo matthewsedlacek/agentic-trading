@@ -93,6 +93,46 @@ research is committee-aligned trading (a member buying in a sector their committ
 oversees); FMP doesn't return committee data, so treat that as optional manual enrichment
 rather than something the run infers.
 
+### Stage 1c — IBD 50 membership flag (signal, not a gate)
+
+Annotate every shortlisted name that has cleared Gate 0 with whether it is currently on
+the **IBD 50**, Investor's Business Daily's weekly, rules-based list of 50 leading growth
+stocks (earnings growth, relative price strength, industry leadership). This is an
+*annotation for the research*, never a pass/fail gate: a name is not screened in, screened
+out, sized up, or exempted from any cap, guardrail or the Stage 4b edge gate because of it.
+
+**Source — Innovator IBD 50 ETF (FFTY) holdings, via the FMP connector.** The official
+IBD 50 sits behind an investors.com subscription with no public API, so do not open,
+scrape, or sign in to investors.com. FFTY's prospectus states it seeks to track the IBD50
+Index, "a weekly, rules-based, computer-generated stock index compiled and published by
+Investor's Business Daily", reconstituted on the last trading day of each week; its
+holdings are a public proxy for the list. Pull them through FMP's ETF holdings data
+(`etf/holdings`, `symbol=FFTY`) — the same FMP connector Stage 1b already uses.
+
+Procedure:
+1. Fetch FFTY holdings **once per run** (not per candidate) and reuse the result.
+2. Keep equity rows only. Drop cash, Treasury bills, money-market and other non-equity
+   rows (the index's defensive mode can hold up to 50% T-bills; that halves equity
+   weights but does not change which stocks are members).
+3. Read the holdings' as-of / updated date. If it is missing or older than **10 calendar
+   days**, treat the source as stale.
+4. Match each candidate on its exact resolved ticker (watch share-class punctuation, e.g.
+   `BRK.B` vs `BRK-B`). Do not match on company name.
+5. Record one of:
+   - `IBD 50: on (FFTY weight X%, holdings as of DATE)`
+   - `IBD 50: off (FFTY holdings as of DATE)`
+   - `IBD 50: unknown (<reason>)`
+
+**Fail open, never fabricate.** If the FMP connector has no ETF-holdings tool, the call
+errors or returns nothing, the equity rows number far from 50, or the data is stale, mark
+every candidate `IBD 50: unknown` with the reason, and carry on with the funnel. Never
+infer membership from memory, news, or a name "looking like" a growth stock — that is
+exactly the fabrication trap in POLICY.md §1.
+
+Caveats to keep in mind when reading the flag: FFTY holdings can trail IBD's own list by
+up to a week (it rebalances weekly; IBD updates its list more often), and FFTY weights
+follow the index's score tiers, so weight is a rough proxy for rank, not the rank itself.
+
 
 ## Stage 2 — Validate (the actual research)
 
@@ -230,10 +270,10 @@ order IDs) for the operator to review later.
 If the order breaches either cap, do not place it. Then:
 
 1. **Write the proposal file.** Save a complete proposal to `proposals/YYYY-MM-DD-TICKER.md`
-   covering: ticker, size, thesis, falsifier, full entry/exit plan, the Stage 4b edge gate
-   line (and its saved JSON path), and which cap, guardrail or regime caused the
-   escalation. Use real data only; no fabricated numbers. Never write a proposal for a
-   name that failed the edge gate.
+   covering: ticker, size, thesis, falsifier, full entry/exit plan, the Stage 1c IBD 50
+   flag, the Stage 4b edge gate line (and its saved JSON path), and which cap, guardrail or
+   regime caused the escalation. Use real data only; no fabricated numbers. Never write a
+   proposal for a name that failed the edge gate.
 
 2. **Commit the proposal.** Stage and commit the file to the current branch with a message
    like `Log TICKER trade proposal for manual review (YYYY-MM-DD run)`.
@@ -348,6 +388,7 @@ Use this structure when presenting a researched candidate:
 ```
 TICKER — [company]                      [PASS / FAIL at stage N]
 Restricted check: clear
+IBD 50:           [on (FFTY weight X%, as of DATE) / off (as of DATE) / unknown (reason)]
 
 Thesis:    I own this because [X].
 Falsifier: I am wrong if [Y].
