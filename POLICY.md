@@ -144,6 +144,40 @@ Note: this is a price / liquidity / valuation screen. Robinhood's fundamentals f
 not expose revenue growth or debt-to-equity, so those quality dimensions are intentionally
 out of scope here — the deep fundamental work happens in Stage 2 (Validate) on survivors.
 
+## 4b. Edge gate (binding — every buy, every lane)
+
+No buy is proposed, escalated or placed until it passes the edge gate (`trading-funnel`
+Stage 4b, computed by `tools/edge_gate.py` from real Robinhood daily bars). This adds to
+the rules above; it never loosens a cap, the restricted list or a guardrail, and it never
+blocks a sell.
+
+- **Market regime (SPY, daily).** Risk-off if SPY is below its 200-day average AND its
+  50-day is below its 200-day, OR SPY's 20-day realised volatility is above **30%**
+  annualised: no new buys at all. Caution if SPY is below its 200-day average, OR 20-day
+  volatility is above **22%**: no auto-lane buys; buys that pass go to the escalation lane.
+  If the regime can't be computed, treat it as risk-off.
+- **Bracket backtest (the ticker, up to 5 years of daily bars).** Replay this position's
+  stop, target and horizon from an entry every 10 trading days, with a 10 bp round-trip
+  cost. To pass, it needs **≥ 20** test entries, a **positive average return per trade**,
+  a **positive average excess return over holding SPY** for the same windows, and a
+  positive average in **both halves** of the history.
+- **Fail closed.** Missing bars, a file you'd have to retype, or too little history all
+  count as FAIL.
+- Interactive sessions only: the operator may override a FAIL by saying so; the override
+  is written in the trade log. Autonomous runs never override.
+
+The thresholds above are starting defaults. Change them here first, then in
+`tools/edge_gate.py`, so the policy and the code agree.
+
+## 4c. Research inputs that are evidence, not triggers
+
+- **Factor research** (`research/factors/`, monthly). A thesis may cite a signal as evidence
+  only if the latest report rates it *supported*. Fundamentals stay *unproven* until tested
+  on point-in-time data.
+- **Satellite Scout** (`research/satellite/`). Dated imagery of a company's sites gives
+  year-over-year context. It can never pass Stage 2 on its own, and no run signs up for,
+  pays for or logs in to an imagery provider.
+
 ---
 
 ## 5. Cadence and tone

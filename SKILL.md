@@ -112,6 +112,36 @@ For shortlisted names only, go deep. Useful lenses, stripped of fabrication trap
 If you cannot write a concrete falsifier, the name does not pass. The falsifier becomes
 the thesis-break sell condition in Stage 4.
 
+**Factor evidence.** If the thesis leans on a measurable signal (momentum, trend, low
+volatility, distance from the 52-week high, or any factor in the latest
+`research/factors/*.md` report), say what the latest report rates it: only a
+**supported** factor may be cited as evidence. An **unproven** factor is opinion, not
+evidence. A **contrary** factor (it pointed the wrong way in the test) must be flagged in
+the output. Fundamentals such as P/E and P/B are unproven by construction until
+point-in-time history exists (see "Factor research" below). If no report exists, write
+"Factor evidence: no report yet".
+
+### Stage 2b — Satellite Scout (optional alt-data, context only)
+
+For names whose business shows up from above (store parking lots, delivery or vehicle
+lots, distribution centres), dated satellite imagery can add a year-over-year read on
+activity. It is **context, never a buy trigger**: it cannot by itself pass Stage 2, and a
+name with no imagery is not penalised.
+
+1. Only use observations already logged in `research/satellite/observations.csv` (format:
+   `research/satellite/observations.example.csv`). Each row is one dated image of one site
+   from a named provider with its image id. Never invent a count, a date or an image.
+2. Run `python3 -m tools.satellite_scout --obs research/satellite/observations.csv --ticker TICKER`.
+   It compares each site's latest image with the same site about a year earlier, same
+   provider, and prefers the same weekday. Fewer than 3 compared sites reads "too thin".
+3. Report the one-line result ("Satellite: up · median YoY +8% across 4 of 5 sites · latest
+   image 2026-11-21"), or "Satellite: no observations". Imagery older than ~60 days is stale
+   context; say so.
+
+How to gather observations, and which imagery sources need a paid account, is in
+`research/satellite/README.md`. A run never signs up for, pays for, or logs in to an imagery
+provider.
+
 ## Stage 3 — Size (fit it to the portfolio)
 
 1. Pull current positions and portfolio value from the connector.
@@ -135,6 +165,42 @@ Exits must run broker-side because you only run when messaged and cannot watch t
 position intraday. Plan to place protective orders at entry so they execute without you.
 Confirm which order types the connector actually supports before relying on one.
 
+## Stage 4b — Edge gate (must pass before any buy is proposed)
+
+The funnel refuses to buy until the name shows an edge. This gate runs after the exit is
+defined and before Stage 5, in every lane, on every buy, including escalations. A name
+that fails here gets **no buy proposal and no order**: report it as `FAIL at Stage 4b`
+with the reasons. Rules and thresholds are in POLICY.md §4b.
+
+1. Pull daily bars for the ticker AND `SPY` in one call: `get_equity_historicals`,
+   `interval: "day"`, `start_time` five years before today, default split adjustment.
+2. The connector response is large, so the harness saves it to a file and gives you the
+   path. Point the tool at that saved file. **Never retype bars by hand**; if you cannot get
+   the bars into a file without retyping, the gate fails closed.
+3. Run, from the repo root:
+   `python3 -m tools.edge_gate --ticker TICKER --bars <file> --spy <file> --stop <stop %> --target <target %> --horizon <trading days>`
+   using the Stage 4 exit plan (defaults: 0.08, 0.16, 126). Save the JSON with
+   `--out research/edge-gate/YYYY-MM-DD-TICKER.json` when you write a proposal or trade log.
+4. Read the result:
+   - **Market regime** (from SPY): `risk_off` blocks every new buy proposal this run;
+     `caution` blocks the auto lane, so an otherwise in-cap buy escalates instead;
+     `unavailable` counts as risk_off.
+   - **Bracket backtest** (the ticker): replays this exact stop/target/horizon from an entry
+     every 10 trading days over the history. It must have at least 20 entries, a positive
+     average return per trade after a 10 bp cost, beat holding SPY over the same windows,
+     and be positive in both the early and the recent half.
+   - `autoLaneAllowed: true` only when the backtest passes and the regime is risk_on.
+5. Put the one-line result in the output ("Edge gate: PASS · regime risk_on · 87 entries,
+   win 46%, expectancy +2.10%, vs SPY +0.80%").
+
+Running the regime check first is allowed and cheap: if SPY is risk_off, skip screening
+and validation for buys this run. Exit management, protective orders and orphaned-order
+reconciliation still run as normal; the edge gate never blocks a sell.
+
+In an interactive session the operator may decide to buy a name that failed the gate.
+That is their call: show the failures, and if they say to go ahead, write "edge gate
+overridden by operator" in the trade log. An autonomous run never overrides the gate.
+
 ## Stage 5 — Execute (lane-gated)
 
 Determine the lane first: **autonomous** (a scheduled/hourly run, no human present) or
@@ -152,6 +218,9 @@ A buy executes automatically ONLY if BOTH:
 - order notional **≤ $25**, AND
 - today's summed buys **< $50** before this order.
 
+…and it has already passed Stage 4b with `autoLaneAllowed: true`. A buy that passed the
+backtest in a `caution` regime goes to the escalation lane instead.
+
 Sequence: re-run Gate 0 → review/simulate the order → place it → immediately stage the
 Stage 4 protective exit orders (stop + target) → log it (ticker, size, thesis, exits,
 order IDs) for the operator to review later.
@@ -161,8 +230,10 @@ order IDs) for the operator to review later.
 If the order breaches either cap, do not place it. Then:
 
 1. **Write the proposal file.** Save a complete proposal to `proposals/YYYY-MM-DD-TICKER.md`
-   covering: ticker, size, thesis, falsifier, full entry/exit plan, and which cap or
-   guardrail it exceeded. Use real data only; no fabricated numbers.
+   covering: ticker, size, thesis, falsifier, full entry/exit plan, the Stage 4b edge gate
+   line (and its saved JSON path), and which cap, guardrail or regime caused the
+   escalation. Use real data only; no fabricated numbers. Never write a proposal for a
+   name that failed the edge gate.
 
 2. **Commit the proposal.** Stage and commit the file to the current branch with a message
    like `Log TICKER trade proposal for manual review (YYYY-MM-DD run)`.
@@ -203,15 +274,39 @@ If the order breaches either cap, do not place it. Then:
 
 ### Interactive lane
 
-Simulate, show cost/fees/resulting position, obtain explicit confirmation, place, then
-stage exits. One confirmation = one order. Above-cap trades the routine queued earlier
+Show the edge gate result, then simulate, show cost/fees/resulting position, obtain
+explicit confirmation, place, then stage exits. One confirmation = one order. Above-cap trades the routine queued earlier
 are approved here.
 
 ### Always, every lane
 
 - Gate 0 runs on the exact ticker immediately before placing. SEZL never trades.
+- Stage 4b has passed for this buy (or, interactive only, the operator overrode it).
 - Every entry gets broker-side protective exit orders so they run without a session.
 - Confirm the connector's supported order types before relying on a stop/target type.
+
+---
+
+## Factor research (offline, monthly — not part of the hourly run)
+
+Before a signal is trusted as evidence, test whether it actually predicted returns. Run
+this when the operator asks, or about once a month; never inside an hourly trading run.
+
+1. Universe: at least 30 liquid names that would pass the §4a screen today, plus current
+   holdings. Exclude restricted names (SEZL). Up to 75 symbols per call.
+2. Pull five years of daily bars with `get_equity_historicals` (`interval: "day"`) and point
+   the tool at the saved file (never retype bars):
+   `python3 -m tools.factor_research --bars <file> --out research/factors/YYYY-MM-DD`
+3. It ranks the universe on each factor every 21 trading days and measures how well the
+   ranking lined up with the next 21 days of returns (Spearman IC). **Supported** needs a
+   positive mean IC with t ≥ 2 over at least 24 periods, positive in both halves.
+4. Commit the `.md` and `.json` report on a branch and open a PR for the operator to read.
+   The newest report is what Stage 2's "Factor evidence" line reads.
+
+Built-in factors use prices only. Current fundamentals can't be tested against past returns
+(look-ahead bias); point-in-time values from a real source can be added with
+`--extra file.csv` (`date,symbol,factor,value`). The universe is today's names, so results
+carry survivorship bias; say so when citing them.
 
 ---
 
@@ -260,6 +355,9 @@ Falsifier: I am wrong if [Y].
 Screen metrics:   [real figures, sourced]
 Valuation:        [DCF range] vs [current price] → [under/fair/over]
 Risk/sizing:      [size], [correlation note], max loss at stop: [$]
+Factor evidence:  [factor → supported / unproven / contrary, report date] or "no report yet"
+Satellite:        [one-line Satellite Scout read] or "no observations"
+Edge gate:        [PASS/FAIL · regime · entries, win rate, expectancy, vs SPY]
 
 Entry plan:       buy [qty] near [price]
 Exit plan:        target [price] · stop [price] · horizon [t] · break: [Y]
@@ -276,4 +374,7 @@ Next action:      simulate order for confirmation? (y/n)
 - Placing any order without a prior review/simulation.
 - Acting on any number you couldn't source from real data.
 - A buy with no defined exit.
+- A buy proposal, escalation or order for a name that failed the Stage 4b edge gate, or
+  whose gate could not run (autonomous runs; interactive override is the operator's call).
+- Treating satellite imagery or an unproven factor as a reason to buy on its own.
 - Manufacturing a trade just because a scheduled run fired. "No action" is valid output.

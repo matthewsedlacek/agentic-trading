@@ -1,0 +1,3 @@
+ticker,site_id,site_name,capture_date,provider,image_id,metric,value,notes
+EXAMPLE,site-01,Example store lot A,2025-11-22,provider-name,img-0001,cars,140,Sat ~11am local; example row only
+EXAMPLE,site-01,Example store lot A,2026-11-21,provider-name,img-0002,cars,161,Sat ~11am local; example row only
